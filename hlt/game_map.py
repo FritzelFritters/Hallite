@@ -7,7 +7,7 @@ class Map:
     
     :ivar my_id: Current player id associated with the map
     :ivar width: Map width
-    :ivar height: Map height
+    :ivar height: Map height 
     """
 
     def __init__(self, my_id, width, height):
