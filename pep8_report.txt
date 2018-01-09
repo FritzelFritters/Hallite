@@ -1,19 +1,30 @@
 MyBot.py:4:80: E501 line too long (94 > 79 characters)
 MyBot.py:10:80: E501 line too long (115 > 79 characters)
 MyBot.py:13:80: E501 line too long (92 > 79 characters)
-MyBot.py:19:80: E501 line too long (115 > 79 characters)
-MyBot.py:29:80: E501 line too long (95 > 79 characters)
-MyBot.py:45:80: E501 line too long (109 > 79 characters)
-MyBot.py:50:80: E501 line too long (120 > 79 characters)
-MyBot.py:51:80: E501 line too long (112 > 79 characters)
-MyBot.py:52:80: E501 line too long (96 > 79 characters)
-MyBot.py:53:80: E501 line too long (84 > 79 characters)
-MyBot.py:54:80: E501 line too long (116 > 79 characters)
-MyBot.py:55:80: E501 line too long (118 > 79 characters)
-MyBot.py:56:80: E501 line too long (117 > 79 characters)
-MyBot.py:58:80: E501 line too long (81 > 79 characters)
-MyBot.py:61:80: E501 line too long (113 > 79 characters)
-MyBot.py:62:80: E501 line too long (96 > 79 characters)
-MyBot.py:72:80: E501 line too long (114 > 79 characters)
-MyBot.py:73:80: E501 line too long (104 > 79 characters)
-MyBot.py:74:80: E501 line too long (80 > 79 characters)
+MyBot.py:15:1: E265 block comment should start with '# '
+MyBot.py:20:80: E501 line too long (115 > 79 characters)
+MyBot.py:28:1: E115 expected an indented block (comment)
+MyBot.py:32:80: E501 line too long (95 > 79 characters)
+MyBot.py:36:1: W293 blank line contains whitespace
+MyBot.py:36:5: E101 indentation contains mixed spaces and tabs
+MyBot.py:36:5: W191 indentation contains tabs
+MyBot.py:37:1: E115 expected an indented block (comment)
+MyBot.py:38:1: E115 expected an indented block (comment)
+MyBot.py:40:7: E111 indentation is not a multiple of four
+MyBot.py:44:7: E111 indentation is not a multiple of four
+MyBot.py:45:7: E111 indentation is not a multiple of four
+MyBot.py:46:7: E111 indentation is not a multiple of four
+MyBot.py:47:80: E501 line too long (101 > 79 characters)
+MyBot.py:48:39: E127 continuation line over-indented for visual indent
+MyBot.py:48:80: E501 line too long (91 > 79 characters)
+MyBot.py:49:1: W293 blank line contains whitespace
+MyBot.py:51:11: E111 indentation is not a multiple of four
+MyBot.py:52:1: E115 expected an indented block (comment)
+MyBot.py:53:1: E115 expected an indented block (comment)
+MyBot.py:55:15: E111 indentation is not a multiple of four
+MyBot.py:55:23: W291 trailing whitespace
+MyBot.py:57:11: E111 indentation is not a multiple of four
+MyBot.py:59:7: E111 indentation is not a multiple of four
+MyBot.py:62:7: E111 indentation is not a multiple of four
+MyBot.py:69:11: E111 indentation is not a multiple of four
+MyBot.py:69:49: W291 trailing whitespace
