@@ -25,7 +25,6 @@ logging.info("Starting my Settler bot!")
 while True:
     # TURN START
     # Get the time at the beginning of the Turn
-#    begin_time=time.clock()
     # Update the map for the new turn and get the latest version
     game_map = game.update_map()
 
@@ -33,9 +32,6 @@ while True:
     command_queue = []
     # For every ship that I control
     for ship in game_map.get_me().all_ships():
-    	
-#    	if time.clock() - begin_time < 1.95:
-#    		break
 
       if ship.docking_status != ship.DockingStatus.UNDOCKED:
         # Skip this ship
@@ -46,27 +42,30 @@ while True:
       for distance in sorted(entities_by_distance):
         nearest_planet = next((nearest_entity for nearest_entity in entities_by_distance[distance] if
                                       isinstance(nearest_entity, hlt.entity.Planet)), None)
-          
-        if nearest_planet:
-          if nearest_planet.is_owned():
-#            if nearest_planet.is_mine():
-#              continue
-            if nearest_planet.is_full():
-              continue 
-            break
-          break
+        if nearest_planet == None:
+            continue
 
-      if ship.can_dock(nearest_planet):
-        # We add the command by appending it to the command_queue
-        command_queue.append(ship.dock(nearest_planet))
-      else:
-        navigate_command = ship.navigate(
+        canDockHere = (nearest_planet.is_owned() and
+                      (nearest_planet.owner == ship.owner) and
+                      not nearest_planet.is_full()) or (not nearest_planet.is_owned())
+
+        if canDockHere:
+            if ship.can_dock(nearest_planet):
+                # We add the command by appending it to the command_queue
+                command_queue.append(ship.dock(nearest_planet))
+            else:
+                navigate_command = ship.navigate(
                     ship.closest_point_to(nearest_planet),
                     game_map,
                     speed=int(hlt.constants.MAX_SPEED),
                     ignore_ships=False)
-        if navigate_command:
-          command_queue.append(navigate_command)               
+                if navigate_command:
+                    command_queue.append(navigate_command)
+            break
+        else:
+            continue   # now get after those planets not highest priority docked to
+
+
 
     game.send_command_queue(command_queue)
 
