@@ -37,8 +37,22 @@ while True:
         # Skip this ship
         continue
 
-      entities_by_distance = game_map.nearby_entities_by_distance(ship)
+      entities_by_distance = game_map.nearby_planets_by_distance(ship)
       nearest_planet = None
+
+      allPlanetsOwned = True
+      for distance in sorted(entities_by_distance):
+        nearest_planet = next((nearest_entity for nearest_entity in entities_by_distance[distance] if
+                                      isinstance(nearest_entity, hlt.entity.Planet)), None)
+        if nearest_planet:
+            if not nearest_planet.is_owned():
+                allPlanetsOwned = False
+                break
+            else:
+                continue
+        else:
+            continue
+
       for distance in sorted(entities_by_distance):
         nearest_planet = next((nearest_entity for nearest_entity in entities_by_distance[distance] if
                                       isinstance(nearest_entity, hlt.entity.Planet)), None)
@@ -47,13 +61,28 @@ while True:
 
         canDockHere = (nearest_planet.is_owned() and
                       (nearest_planet.owner == ship.owner) and
-                      not nearest_planet.is_full()) or (not nearest_planet.is_owned())
+                      not nearest_planet.is_full()) or (not nearest_planet.is_owned()) or allPlanetsOwned
 
-        if canDockHere:
+        if allPlanetsOwned:
+            if nearest_planet.owner == ship.owner:
+                continue
+            logging.info("allPlanetsOwned")
+            navigate_command = ship.navigate(
+                nearest_planet,
+                game_map,
+                speed=int(hlt.constants.MAX_SPEED),
+                ignore_ships=False)
+            if navigate_command:
+                command_queue.append(navigate_command)
+            break
+        elif canDockHere:
+            logging.info("candockhere")
             if ship.can_dock(nearest_planet):
                 # We add the command by appending it to the command_queue
                 command_queue.append(ship.dock(nearest_planet))
+                logging.info("candoc1")
             else:
+                logging.info("candoc2")
                 navigate_command = ship.navigate(
                     ship.closest_point_to(nearest_planet),
                     game_map,
@@ -63,9 +92,7 @@ while True:
                     command_queue.append(navigate_command)
             break
         else:
-            continue   # now get after those planets not highest priority docked to
-
-
+            continue
 
     game.send_command_queue(command_queue)
 
